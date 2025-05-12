@@ -389,6 +389,7 @@ h1 {
     .github-corner svg {
         width: 60px;
         height: 60px;
+        z-index: 1;
     }
     
     .footer {
