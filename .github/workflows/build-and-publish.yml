@@ -72,7 +72,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/rahb-realtors-association/audio-converter
+          images: ghcr.io/rahb-realtors-association/wav-maker
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}
@@ -132,9 +132,9 @@ jobs:
             ## Docker Images
             You can pull this release using:
             ```bash
-            docker pull ghcr.io/${{ github.repository_owner }}/audio-converter:${{ steps.get_version.outputs.VERSION }}
+            docker pull ghcr.io/${{ github.repository_owner }}/wav-maker:${{ steps.get_version.outputs.VERSION }}
             # or
-            docker pull ghcr.io/${{ github.repository_owner }}/audio-converter:latest
+            docker pull ghcr.io/${{ github.repository_owner }}/wav-maker:latest
             ```
           draft: false
           prerelease: false
