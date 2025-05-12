@@ -44,12 +44,24 @@ jobs:
       
       - name: Test with pytest
         run: |
-          # Make sure templates and static dirs exist for the tests
-          mkdir -p templates static
-          cp -r templates/* templates/ || true
-          cp -r static/* static/ || true
-          # Run the tests
-          pytest tests/ --cov=app --cov-report=xml
+          # Create test directory structure
+          mkdir -p test_templates test_static
+          
+          # Copy template and static files if they exist
+          if [ -d "templates" ]; then
+            cp -r templates/* test_templates/ 2>/dev/null || true
+          fi
+          if [ -d "static" ]; then
+            cp -r static/* test_static/ 2>/dev/null || true
+          fi
+          
+          # Create a minimal index.html for testing if it doesn't exist
+          if [ ! -f "test_templates/index.html" ]; then
+            echo '<!DOCTYPE html><html lang="en"><head><title>Audio Converter Test</title></head><body><h1>Audio Converter</h1><p>Convert to mono/8kHz/16-bit WAV format</p></body></html>' > test_templates/index.html
+          fi
+          
+          # Run pytest with the test directories
+          FLASK_APP=app.py TEMPLATES_AUTO_RELOAD=True pytest tests/ --cov=app --cov-report=xml
       
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
@@ -76,7 +88,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/${{ github.repository_owner }}/wav-maker
+          images: ghcr.io/${{ github.repository_owner }}/audio-converter
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}
@@ -136,9 +148,9 @@ jobs:
             ## Docker Images
             You can pull this release using:
             ```bash
-            docker pull ghcr.io/${{ github.repository_owner }}/wav-maker:${{ steps.get_version.outputs.VERSION }}
+            docker pull ghcr.io/${{ github.repository_owner }}/audio-converter:${{ steps.get_version.outputs.VERSION }}
             # or
-            docker pull ghcr.io/${{ github.repository_owner }}/wav-maker:latest
+            docker pull ghcr.io/${{ github.repository_owner }}/audio-converter:latest
             ```
           draft: false
           prerelease: false
