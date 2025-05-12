@@ -120,6 +120,11 @@ def test_convert_audio(mock_audiosegment, mock_mediainfo, mock_getsize, mock_exi
     mock_converted.frame_rate = 8000
     mock_converted.sample_width = 2
     
+    # Make sure the mock returns itself after operations to allow chaining
+    mock_sound.set_channels.return_value = mock_sound
+    mock_sound.set_frame_rate.return_value = mock_sound
+    mock_sound.set_sample_width.return_value = mock_sound
+    
     # Set up side effect to return different mocks for different calls
     mock_audiosegment.from_file.side_effect = [mock_sound, mock_converted]
     
@@ -149,6 +154,7 @@ def test_convert_audio(mock_audiosegment, mock_mediainfo, mock_getsize, mock_exi
         # Check that audio was converted with the correct parameters
         mock_sound.set_channels.assert_called_once_with(1)
         mock_sound.set_frame_rate.assert_called_once_with(8000)
+        mock_sound.set_sample_width.assert_called_once_with(2)
         
         # Check that export was called with the correct parameters
         mock_sound.export.assert_called_once()
