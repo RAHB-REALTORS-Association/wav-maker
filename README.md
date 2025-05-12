@@ -1,6 +1,17 @@
+[![Build and Publish](https://github.com/RAHB-REALTORS-Association/wav-maker/actions/workflows/build-and-publish.yml/badge.svg)](https://github.com/RAHB-REALTORS-Association/wav-maker/actions/workflows/build-and-publish.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+<div align="center">
+    <img src="https://raw.githubusercontent.com/RAHB-REALTORS-Association/wav-maker/main/assets/wav-maker-logo.png" alt="WAV Maker Logo" width="200"/>
+</div>
+
 # 🔈 WAV Maker
 
 A lightweight, containerized web tool to convert audio files to **mono, 8kHz, 16-bit WAV** format. 🔄🎵
+
+![WAV Maker Screemshot 1](assets/screenshot.png)
+
+![WAV Maker Screemshot 2](assets/screenshot2.png)
 
 ## 🚀 Overview
 

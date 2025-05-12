@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Blue circular background -->
+  <circle cx="100" cy="100" r="85" fill="#4977e5" />
+  <circle cx="100" cy="100" r="80" fill="#5b89f7" />
+  
+  <!-- Inner white circular background -->
+  <circle cx="100" cy="100" r="60" fill="#ffffff" />
+  
+  <!-- Audio waveform bars -->
+  <g fill="#5b89f7">
+    <!-- Bar 1 -->
+    <rect x="55" y="75" width="6" height="50" rx="3" />
+    
+    <!-- Bar 2 -->
+    <rect x="70" y="65" width="6" height="70" rx="3" />
+    
+    <!-- Bar 3 -->
+    <rect x="85" y="55" width="6" height="90" rx="3" />
+    
+    <!-- Bar 4 (center, tallest) -->
+    <rect x="100" y="50" width="6" height="100" rx="3" />
+    
+    <!-- Bar 5 -->
+    <rect x="115" y="55" width="6" height="90" rx="3" />
+    
+    <!-- Bar 6 -->
+    <rect x="130" y="65" width="6" height="70" rx="3" />
+    
+    <!-- Bar 7 -->
+    <rect x="145" y="75" width="6" height="50" rx="3" />
+  </g>
+</svg>
