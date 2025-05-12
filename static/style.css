@@ -335,6 +335,10 @@ h1 {
     background-position: center;
 }
 
+.github svg {
+    z-index: 1;
+}
+
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
     .container {
