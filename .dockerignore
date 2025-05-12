@@ -1,0 +1,83 @@
+# Version control
+.git
+.gitignore
+.github
+
+# Environment variables
+.env
+.env.*
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+.virtualenv/
+
+# Test files and directories
+tests/
+test_*.py
+pytest_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+coverage.xml
+*.cover
+coverage/
+
+# Documentation
+docs/
+*.md
+!README.md
+!COOLIFY.md
+LICENSE
+
+# Editor and IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+.project
+.classpath
+.settings/
+
+# Local development files
+task_data/
+temp_uploads/
+temp_converted/
+*.log
+logs/
+
+# Docker files (except Dockerfile)
+docker-compose*.yml
+docker-compose*.yaml
+.dockerignore
+
+# Other unnecessary files
+*.bak
+*.tmp
+*.temp
