@@ -400,7 +400,7 @@ def upload_file():
             return jsonify({'task_id': task_id})
         except Exception as e:
             logger.error(f"Exception during file upload: {e}")
-            return jsonify({'error': f'Upload failed: {str(e)}'}), 500
+            return jsonify({'error': 'An internal error occurred.'}), 500
 
 @app.route('/status/<task_id>')
 def check_status(task_id):
