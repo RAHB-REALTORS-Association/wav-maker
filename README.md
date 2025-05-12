@@ -1,4 +1,4 @@
-# 🎧 Audio Converter
+# 🔈 WAV Maker
 
 A lightweight, containerized web tool to convert audio files to **mono, 8kHz, 16-bit WAV** format. 🔄🎵
 
@@ -10,7 +10,7 @@ This application provides a simple web interface for converting various audio fo
 * ⚡ **Fast**: Asynchronous conversion with progress tracking ⏱️
 * 🔐 **Secure**: No permanent file storage, automatic cleanup 🧹
 * 🧱 **Scalable**: Containerized for easy deployment 🐳
-* 💪 **Reliable**: Error handling and recovery built-in 🚧
+* 💪 **Reliable**: Persistent task tracking for robustness 🏆
 
 ## ✨ Features
 
@@ -21,20 +21,36 @@ This application provides a simple web interface for converting various audio fo
 * 📱 Responsive design that works on mobile and desktop
 * 🐳 Docker containerization for simple deployment
 * 🗑️ No permanent file storage (files automatically deleted after download)
+* 🔁 "Convert Another" functionality for batch processing
 
 ## 🛠 Requirements
 
 * 🐳 Docker and Docker Compose
 
-That’s it! Everything else runs inside the container. 🚀
+That's it! Everything else runs inside the container. 🚀
 
 ## ⚡ Quick Start
+
+### Using GitHub Container Registry (Recommended)
+
+```bash
+# Pull the latest image
+docker pull ghcr.io/yourusername/wav-maker:latest
+
+# Create a directory for persistent data
+mkdir -p task_data
+
+# Run the container
+docker run -d -p 5000:5000 -v $(pwd)/task_data:/app/conversion_tasks.json --name wav-maker ghcr.io/yourusername/wav-maker:latest
+```
+
+### Building Locally
 
 1. 📥 Clone this repository:
 
    ```bash
-   git clone https://github.com/yourusername/audio-converter.git
-   cd audio-converter
+   git clone https://github.com/yourusername/wav-maker.git
+   cd wav-maker
    ```
 
 2. ▶️ Start the application with Docker Compose:
@@ -54,7 +70,7 @@ That’s it! Everything else runs inside the container. 🚀
 ## 📁 Project Structure
 
 ```
-audio_converter/
+wav_maker/
 ├── app.py                 # 🧠 Main Flask application
 ├── requirements.txt       # 📦 Python dependencies
 ├── Dockerfile             # 🐳 Docker image configuration
@@ -62,8 +78,10 @@ audio_converter/
 ├── static/                # 🎨 CSS and JavaScript
 │   ├── style.css
 │   └── script.js
-└── templates/             # 🖼️ HTML templates
-    └── index.html
+├── templates/             # 🖼️ HTML templates
+│   └── index.html
+└── tests/                 # 🧪 Unit tests
+    └── test_app.py
 ```
 
 ## ⚙️ Configuration
@@ -86,12 +104,12 @@ Powered by **`pydub`** + **FFmpeg**:
 3. Encode to 16-bit PCM 🧱
 4. Export as WAV 📤
 
-### 🔐 File Handling
+### 🔐 Task Management
 
-* 📥 Uploaded → `temp_uploads/`
-* 🔄 Converted → `temp_converted/`
-* 🧹 Auto-cleanup after download or timeout
-* ⚡ Uses `tmpfs` in Docker for performance & security
+* 📝 Each conversion has a unique task ID
+* 💾 Task status is persistently stored
+* 🔄 Status is tracked through the entire process
+* 🧹 Auto-cleanup of old tasks and files
 
 ### 🛡️ Security Considerations
 
@@ -110,6 +128,18 @@ To modify and test:
    ```bash
    docker-compose up --build -d
    ```
+
+### 🧪 Running Tests
+
+Run the test suite with:
+
+```bash
+# Install test dependencies
+pip install pytest pytest-cov
+
+# Run tests
+pytest tests/ --cov=app
+```
 
 ### 🧪 Local Dev Without Docker
 
@@ -130,6 +160,14 @@ To modify and test:
    ```bash
    python app.py
    ```
+
+## 🚀 CI/CD
+
+This project uses GitHub Actions for continuous integration and delivery:
+
+* 🧪 Automatic testing on push and pull requests
+* 🐳 Docker image building and publishing to GitHub Container Registry
+* 📦 Automatic release creation on version tags
 
 ## 🩺 Troubleshooting
 
