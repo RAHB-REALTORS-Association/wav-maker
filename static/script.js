@@ -17,6 +17,30 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentTaskId = null;
     let statusCheckInterval = null;
 
+    // Theme Management - Simplified for automatic system preference only
+    function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+    }
+
+    // Check for system color scheme preference
+    function initializeTheme() {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+    }
+
+    // Initialize theme on page load
+    initializeTheme();
+
+    // Listen for system theme changes
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            setTheme(e.matches ? 'dark' : 'light');
+        });
+    }
+
     // Prevent default drag behaviors
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
         dropArea.addEventListener(eventName, preventDefaults, false);

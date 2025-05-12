@@ -5,20 +5,133 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+:root {
+    --bg-primary: #f5f7fa;
+    --bg-secondary: #ffffff;
+    --text-primary: #333333;
+    --text-secondary: #718096;
+    --text-tertiary: #a0aec0;
+    --accent-color: #4299e1;
+    --accent-hover: #3182ce;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --border-color: #e2e8f0;
+    --drop-area-bg: #f7fafc;
+    --drop-area-border: #cbd5e0;
+    --drop-area-highlight: #ebf8ff;
+    --success-color: #38a169;
+    --error-bg: #fff5f5;
+    --error-border: #fed7d7;
+    --error-color: #e53e3e;
+    --error-text: #c53030;
+    --button-bg: #edf2f7;
+    --button-color: #4a5568;
+    --progress-bg: #edf2f7;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a202c;
+    --bg-secondary: #2d3748;
+    --text-primary: #f7fafc;
+    --text-secondary: #cbd5e0;
+    --text-tertiary: #a0aec0;
+    --accent-color: #4299e1;
+    --accent-hover: #63b3ed;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --border-color: #4a5568;
+    --drop-area-bg: #2d3748;
+    --drop-area-border: #4a5568;
+    --drop-area-highlight: #2b4b6e;
+    --success-color: #48bb78;
+    --error-bg: #742a2a;
+    --error-border: #9b2c2c;
+    --error-color: #fc8181;
+    --error-text: #feb2b2;
+    --button-bg: #4a5568;
+    --button-color: #e2e8f0;
+    --progress-bg: #2d3748;
+}
+
 body {
-    background-color: #f5f7fa;
-    color: #333;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
     max-width: 800px;
     margin: 2rem auto;
     padding: 2rem;
-    background-color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: var(--bg-secondary);
+    box-shadow: 0 4px 12px var(--shadow-color);
     border-radius: 8px;
     position: relative;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 10;
+}
+
+.theme-toggle-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    width: 50px;
+    height: 25px;
+    background-color: var(--button-bg);
+    border-radius: 100px;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.theme-toggle-label .sun,
+.theme-toggle-label .moon {
+    font-size: 14px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.theme-toggle-label .sun {
+    margin-left: 5px;
+    color: #f6ad55;
+}
+
+.theme-toggle-label .moon {
+    margin-right: 5px;
+    color: #a0aec0;
+}
+
+.theme-toggle-label .ball {
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: 21px;
+    width: 21px;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle-checkbox {
+    opacity: 0;
+    position: absolute;
+}
+
+.theme-toggle-checkbox:checked + .theme-toggle-label .ball {
+    transform: translateX(25px);
 }
 
 /* Logo Styles */
@@ -86,13 +199,13 @@ body {
 
 h1 {
     text-align: center;
-    color: #2d3748;
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
 }
 
 .subtitle {
     text-align: center;
-    color: #718096;
+    color: var(--text-secondary);
     margin-bottom: 2rem;
 }
 
@@ -102,17 +215,17 @@ h1 {
     align-items: center;
     justify-content: center;
     height: 250px;
-    border: 2px dashed #cbd5e0;
+    border: 2px dashed var(--drop-area-border);
     border-radius: 8px;
-    background-color: #f7fafc;
+    background-color: var(--drop-area-bg);
     position: relative;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .drop-area.highlight {
-    border-color: #4299e1;
-    background-color: #ebf8ff;
+    border-color: var(--accent-color);
+    background-color: var(--drop-area-highlight);
 }
 
 .drop-area.reset-animation {
@@ -132,21 +245,21 @@ h1 {
 .icon {
     font-size: 3rem;
     margin-bottom: 1rem;
-    color: #718096;
+    color: var(--text-secondary);
 }
 
 .drop-area:hover .icon {
-    color: #4299e1;
+    color: var(--accent-color);
 }
 
 .small {
     font-size: 0.9rem;
-    color: #718096;
+    color: var(--text-secondary);
 }
 
 .formats {
     font-size: 0.8rem;
-    color: #a0aec0;
+    color: var(--text-tertiary);
     margin-top: 1rem;
 }
 
@@ -166,13 +279,13 @@ h1 {
 .status-message {
     text-align: center;
     margin-bottom: 1rem;
-    color: #2d3748;
+    color: var(--text-primary);
     font-weight: 500;
 }
 
 .progress-container {
     width: 100%;
-    background-color: #edf2f7;
+    background-color: var(--progress-bg);
     border-radius: 999px;
     height: 12px;
     overflow: hidden;
@@ -181,7 +294,7 @@ h1 {
 
 .progress-bar {
     height: 100%;
-    background-color: #4299e1;
+    background-color: var(--accent-color);
     width: 0%;
     transition: width 0.5s ease;
 }
@@ -199,14 +312,14 @@ h1 {
 }
 
 .success-message {
-    color: #38a169;
+    color: var(--success-color);
     font-weight: 500;
     margin-bottom: 1rem;
 }
 
 .download-button {
     display: inline-block;
-    background-color: #4299e1;
+    background-color: var(--accent-color);
     color: white;
     text-decoration: none;
     padding: 0.8rem 2rem;
@@ -216,35 +329,36 @@ h1 {
 }
 
 .download-button:hover {
-    background-color: #3182ce;
+    background-color: var(--accent-hover);
 }
 
 .reload-button {
     display: inline-block;
-    background-color: #edf2f7;
-    color: #4a5568;
+    background-color: var(--button-bg);
+    color: var(--button-color);
     text-decoration: none;
     padding: 0.8rem 2rem;
     border-radius: 6px;
     font-weight: 500;
     cursor: pointer;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color);
     transition: all 0.3s;
 }
 
 .reload-button:hover {
-    background-color: #e2e8f0;
+    background-color: var(--button-bg);
+    filter: brightness(0.9);
 }
 
 .file-info {
     margin-top: 1.5rem;
-    color: #4a5568;
+    color: var(--text-primary);
     font-size: 0.95rem;
     text-align: left;
-    background-color: #f7fafc;
+    background-color: var(--drop-area-bg);
     padding: 1rem;
     border-radius: 6px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color);
     line-height: 1.8;
 }
 
@@ -252,36 +366,37 @@ h1 {
     text-align: center;
     margin-top: 2rem;
     padding: 1.5rem;
-    background-color: #fff5f5;
+    background-color: var(--error-bg);
     border-radius: 8px;
-    border: 1px solid #fed7d7;
+    border: 1px solid var(--error-border);
 }
 
 .error-icon {
     font-size: 2rem;
-    color: #e53e3e;
+    color: var(--error-color);
     margin-bottom: 1rem;
 }
 
 .error-message {
-    color: #c53030;
+    color: var(--error-text);
     margin-bottom: 1.5rem;
 }
 
 .retry-button, .cancel-button {
     display: inline-block;
     padding: 0.6rem 1.2rem;
-    background-color: #f7fafc;
-    border: 1px solid #e2e8f0;
+    background-color: var(--button-bg);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
-    color: #4a5568;
+    color: var(--button-color);
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 500;
 }
 
 .retry-button:hover, .cancel-button:hover {
-    background-color: #edf2f7;
+    background-color: var(--button-bg);
+    filter: brightness(0.9);
 }
 
 .cancel-button {
@@ -294,8 +409,8 @@ h1 {
     text-align: center;
     margin-top: 3rem;
     padding-top: 1rem;
-    border-top: 1px solid #edf2f7;
-    color: #a0aec0;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-tertiary);
     font-size: 0.85rem;
     display: flex;
     flex-direction: column;
@@ -304,14 +419,14 @@ h1 {
 }
 
 .footer a {
-    color: #4299e1;
+    color: var(--accent-color);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .footer a:hover {
     text-decoration: underline;
-    color: #5b89f7;
+    color: var(--accent-hover);
 }
 
 .version {
@@ -358,6 +473,11 @@ h1 {
     .download-button, .reload-button {
         width: 100%;
     }
+
+    .theme-toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -398,6 +518,11 @@ h1 {
     
     .footer {
         padding: 1rem 0.5rem;
+    }
+
+    .theme-toggle {
+        top: 0.5rem;
+        right: 0.5rem;
     }
 }
 
@@ -487,7 +612,8 @@ h1 {
 .retry-button:focus,
 .cancel-button:focus,
 .download-button:focus,
-.reload-button:focus {
+.reload-button:focus,
+.theme-toggle-checkbox:focus + .theme-toggle-label {
     outline: none;
     box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
 }
@@ -519,7 +645,8 @@ h1 {
     .cancel-button,
     .download-button,
     .reload-button,
-    .footer {
+    .footer,
+    .theme-toggle {
         display: none !important;
     }
     
