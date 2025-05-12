@@ -8,29 +8,38 @@ from unittest.mock import patch, MagicMock, mock_open
 # Add the parent directory to the path so we can import the app
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from app import app, convert_audio
+# Import app module but manually set template/static folder before creating test client
+import app
 
 
 @pytest.fixture
 def client():
     """Create a test client for the app."""
-    app.config['TESTING'] = True
-    app.config['UPLOAD_FOLDER'] = tempfile.mkdtemp()
-    app.config['CONVERTED_FOLDER'] = tempfile.mkdtemp()
-    app.config['TASKS_FILE'] = tempfile.mktemp()
+    # Configure app for testing
+    test_app = app.app
+    test_app.config['TESTING'] = True
+    test_app.config['UPLOAD_FOLDER'] = tempfile.mkdtemp()
+    test_app.config['CONVERTED_FOLDER'] = tempfile.mkdtemp()
+    test_app.config['TASKS_FILE'] = tempfile.mktemp()
+    
+    # Override template and static folders
+    test_dir = os.path.dirname(os.path.abspath(__file__))
+    repo_dir = os.path.dirname(test_dir)
+    test_app.template_folder = os.path.join(repo_dir, 'test_templates')
+    test_app.static_folder = os.path.join(repo_dir, 'test_static')
     
     # Create an empty tasks file
-    with open(app.config['TASKS_FILE'], 'w') as f:
+    with open(test_app.config['TASKS_FILE'], 'w') as f:
         json.dump({}, f)
     
-    with app.test_client() as client:
+    with test_app.test_client() as client:
         yield client
     
     # Cleanup temporary directories and files
     try:
-        os.unlink(app.config['TASKS_FILE'])
-        os.rmdir(app.config['UPLOAD_FOLDER'])
-        os.rmdir(app.config['CONVERTED_FOLDER'])
+        os.unlink(test_app.config['TASKS_FILE'])
+        os.rmdir(test_app.config['UPLOAD_FOLDER'])
+        os.rmdir(test_app.config['CONVERTED_FOLDER'])
     except:
         pass
 
@@ -39,11 +48,11 @@ def test_index_route(client):
     """Test the index route returns the expected content."""
     response = client.get('/')
     assert response.status_code == 200
-    # Check for simpler elements that should be in any version of our template
+    # Check for elements in the test template
     assert b'<!DOCTYPE html>' in response.data
     assert b'<html lang="en">' in response.data
-    assert b'audio' in response.data.lower()
-    assert b'convert' in response.data.lower()
+    assert b'Convert' in response.data
+    assert b'Audio' in response.data
 
 
 def test_upload_no_file(client):
@@ -82,7 +91,7 @@ def test_upload_success(mock_thread, client):
     
     # Verify the thread was started with the correct arguments
     args, kwargs = mock_thread.call_args
-    assert kwargs.get('target') == convert_audio
+    assert kwargs.get('target') == app.convert_audio
 
 
 def test_status_unknown(client):
@@ -130,7 +139,7 @@ def test_convert_audio(mock_audiosegment, mock_mediainfo, mock_getsize, mock_exi
         input_path = 'test_input.mp3'
         output_dir = 'test_output_dir'
         
-        result = convert_audio(input_path, output_dir, task_id)
+        result = app.convert_audio(input_path, output_dir, task_id)
         
         # Check the mock tasks were updated correctly
         assert task_id in mock_tasks
