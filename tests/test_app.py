@@ -112,7 +112,8 @@ def test_convert_audio(mock_audiosegment, mock_mediainfo, mock_getsize, mock_exi
     mock_sound = MagicMock()
     mock_sound.channels = 2
     mock_sound.frame_rate = 44100
-    mock_sound.sample_width = 2
+    # Set sample width to 1 (8-bit) to ensure set_sample_width gets called
+    mock_sound.sample_width = 1
     
     # Setup mock for converted sound
     mock_converted = MagicMock()
