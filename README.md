@@ -9,9 +9,7 @@
     <p>A lightweight web tool for converting audio files to <strong>mono, 8kHz, 16-bit WAV format</strong>. 🔄🎵</p>
 </div>
 
-![WAV Maker Screemshot 1](assets/screenshot.png)
-
-![WAV Maker Screemshot 2](assets/screenshot2.png)
+![WAV Maker Screenshot](assets/wav-maker-animation.webp)
 
 ## 🚀 Overview
 
