@@ -4,10 +4,10 @@
 <div align="center">
     <img src="https://raw.githubusercontent.com/RAHB-REALTORS-Association/wav-maker/main/assets/wav-maker-logo.png" alt="WAV Maker Logo" width="200"/>
 </div>
-
-# 🔈 WAV Maker
-
-A lightweight, containerized web tool to convert audio files to **mono, 8kHz, 16-bit WAV** format. 🔄🎵
+<div align="center">
+    <h1>WAV Maker</h1>
+    <p>A lightweight web tool for converting audio files to <strong>mono, 8kHz, 16-bit WAV format</strong>. 🔄🎵</p>
+</div>
 
 ![WAV Maker Screemshot 1](assets/screenshot.png)
 
