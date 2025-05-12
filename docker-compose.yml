@@ -1,0 +1,30 @@
+services:
+  wav-maker:
+    build: .
+    container_name: wav-maker
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:5000/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    volumes:
+      # Mount as persistent volumes with correct permissions
+      - audio_uploads:/app/temp_uploads
+      - audio_converted:/app/temp_converted
+    environment:
+      - FLASK_ENV=production
+      - MAX_CONTENT_LENGTH=104857600  # 100MB
+      - FILE_RETENTION_MINUTES=30
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  audio_uploads:
+  audio_converted:

@@ -1,0 +1,74 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAV Maker - Mono/8kHz/16-bit WAV</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="sound-wave">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                </div>
+                <div class="logo-text">WAV Maker</div>
+            </div>
+        </div>
+        <p class="subtitle">Convert to mono/8kHz/16-bit WAV format</p>
+        
+        <div class="drop-area" id="drop-area">
+            <input type="file" id="fileElem" accept=".mp3,.wav" class="file-input">
+            <div class="drop-message">
+                <div class="icon">📁</div>
+                <p>Drag &amp; drop your audio file here</p>
+                <p class="small">or click to browse</p>
+                <p class="formats">Supported formats: MP3, WAV</p>
+            </div>
+        </div>
+        
+        <div class="conversion-status" id="conversionStatus" style="display: none;">
+            <div class="status-message" id="statusMessage">Processing...</div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="action-buttons">
+                <div class="cancel-button" id="cancelButton">Cancel</div>
+            </div>
+        </div>
+        
+        <div class="download-container" id="downloadContainer" style="display: none;">
+            <div class="success-message">Conversion complete!</div>
+            <div class="action-buttons">
+                <a href="#" id="downloadLink" class="download-button">Download Converted WAV</a>
+                <button class="reload-button" id="reloadButton">Convert Another File</button>
+            </div>
+            <div class="file-info" id="fileInfo"></div>
+        </div>
+        
+        <div class="error-container" id="errorContainer" style="display: none;">
+            <div class="error-icon">❌</div>
+            <div class="error-message" id="errorMessage"></div>
+            <div class="action-buttons">
+                <div class="retry-button" id="retryButton">Try Again</div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <p>© 2025 Cornerstone Association of REALTORS® | <a href="#" id="reloadFooter">Start Over</a></p>
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
