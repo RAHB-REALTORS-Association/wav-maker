@@ -107,7 +107,9 @@ jobs:
     needs: build-and-publish
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents:
+        read: true
+        write: true
     if: startsWith(github.ref, 'refs/tags/v')
     
     steps:
