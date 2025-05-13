@@ -21,14 +21,6 @@ This application provides a simple web interface for converting various audio fo
 * 🧱 **Scalable**: Containerized for easy deployment 🐳
 * 💪 **Reliable**: Persistent task tracking for robustness 🏆
 
-## 📸 Screenshots
-
-![Dark Mode](assets/screenshot_dark.png)
-
-![Light Mode](assets/screenshot_light.png)
-
-![Converted File](assets/screenshot_converted.png)
-
 ## ✨ Features
 
 * 📂 Drag-and-drop file uploads
@@ -40,6 +32,14 @@ This application provides a simple web interface for converting various audio fo
 * 🗑️ No permanent file storage (files automatically deleted after download)
 * 🔁 "Convert Another" functionality for batch processing
 * 🌙 Dark Mode / Light Mode
+
+## 📸 Screenshots
+
+![Dark Mode](assets/screenshot_dark.png)
+
+![Light Mode](assets/screenshot_light.png)
+
+![Converted File](assets/screenshot_converted.png)
 
 ## 🛠 Requirements
 
