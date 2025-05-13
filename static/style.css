@@ -454,7 +454,7 @@ h1 {
 }
 
 /* GitHub Corner Left */
-.github-corner-left:hover .octo-arm {
+.github-corner:hover .octo-arm {
     animation: octocat-wave 560ms ease-in-out;
 }
 
@@ -464,7 +464,7 @@ h1 {
     40%, 80% {transform: rotate(10deg)}
 }
 
-.github-corner svg {
+.github-corner svg, .github-corner svg {
     z-index: 1;
 }
 
@@ -525,17 +525,12 @@ h1 {
         padding: 0.8rem;
     }
 
-    .github-corner-left:hover .octo-arm {
+    .github-corner:hover .octo-arm {
         animation: none;
     }
 
-    .github-corner-left .octo-arm {
+    .github-corner .octo-arm {
         animation: octocat-wave 560ms ease-in-out;
-    }
-
-    .github-corner-left svg {
-        width: 60px;
-        height: 60px;
     }
 
     .github-corner svg {
