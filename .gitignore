@@ -174,3 +174,4 @@ vendor/
 task_data/
 temp_converted/
 temp_uploads/
+conversion_tasks.json

@@ -47,13 +47,14 @@ htmlcov/
 coverage.xml
 *.cover
 coverage/
+pytest.ini
+setup.py
 
 # Documentation
+assets/
 docs/
 *.md
-!README.md
 !COOLIFY.md
-LICENSE
 
 # Editor and IDE files
 .idea/
@@ -64,6 +65,7 @@ LICENSE
 .project
 .classpath
 .settings/
+pyproject.toml
 
 # Local development files
 task_data/

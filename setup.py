@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name="audio-converter",
+    name="wav-maker",
     version="1.0.0",
     py_modules=["app"],  # Explicitly list the app.py module
     include_package_data=True,

@@ -1,6 +1,6 @@
 # CI/CD for Audio Converter
 
-This document explains the Continuous Integration and Continuous Delivery setup for the Audio Converter application.
+This document explains the Continuous Integration and Continuous Delivery setup for the WAV Maker application.
 
 ## Overview
 
