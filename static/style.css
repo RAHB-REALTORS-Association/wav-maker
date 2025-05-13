@@ -431,18 +431,22 @@ h1 {
     color: var(--accent-hover);
 }
 
-.version {
+.credit {
+    font-weight: bold;
+}
+
+.github-footer {
     font-size: 0.8rem;
     opacity: 0.8;
 }
 
-.version a {
+.github-footer a {
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
 }
 
-.version a::before {
+.github-footer a::before {
     content: "";
     display: inline-block;
     width: 16px;
