@@ -34,10 +34,13 @@ venv/
 ENV/
 env/
 .venv/
+.venv*/
 .virtualenv/
 
 # Test files and directories
 tests/
+test_templates/
+test_static/
 test_*.py
 pytest_cache/
 .pytest_cache/

@@ -1,5 +1,5 @@
-# Use Python 3.11 slim for better performance and security
-FROM python:3.12-slim
+# Keep the runtime aligned with CI and the supported audioop-lts wheels.
+FROM python:3.15-slim
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
