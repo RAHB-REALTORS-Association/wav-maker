@@ -31,6 +31,7 @@ The workflow runs on:
 - Executes unit tests with pytest
 - Generates code coverage reports
 - Uploads coverage data to Codecov (if configured)
+- Uses Python 3.15, matching the Docker runtime. Python 3.13+ installs `audioop-lts` for pydub's audio conversion support.
 
 #### 2. Build and Publish
 
@@ -80,7 +81,7 @@ To create a new release:
 ## Container Image Specification
 
 The published Docker image:
-- Is based on Python 3.11
+- Is based on Python 3.15
 - Has FFmpeg installed for audio processing
 - Runs as a non-root user for security
 - Exposes port 5000
@@ -96,6 +97,12 @@ The Docker images are ready to be pulled by your production infrastructure. You 
 3. Set up monitoring to detect when new images are published
 
 The images are publicly accessible in the GitHub Container Registry, making them easy to integrate with various deployment platforms.
+
+## Dependency updates
+
+Dependabot groups weekly Python and GitHub Actions version updates into one PR per ecosystem, with separate groups for security updates. Keep Python runtime requirements in `requirements.txt` and `setup.py` consistent, and keep the CI Python version aligned with the Docker base image. Local package installs require Python 3.11 or newer and FFmpeg; Python 3.13+ also needs the conditional `audioop-lts` dependency.
+
+Run `python -m pytest tests/ --cov=app` to check the application, including a real stereo WAV conversion to mono 8 kHz, 16-bit audio. The container still uses one Gunicorn worker for task-file consistency.
 
 ## Troubleshooting
 

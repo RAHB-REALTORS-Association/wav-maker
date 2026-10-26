@@ -6,10 +6,11 @@ setup(
     py_modules=["app"],  # Explicitly list the app.py module
     include_package_data=True,
     install_requires=[
-        "Flask>=2.2.0",
+        "Flask>=3.1.3",
         "pydub>=0.25.1",
-        "Werkzeug>=2.2.0",
-        "gunicorn>=20.1.0",
+        "audioop-lts>=0.2.2; python_version >= '3.13'",
+        "Werkzeug>=3.1.9",
+        "gunicorn>=26.2.0",
     ],
-    python_requires=">=3.8",
+    python_requires=">=3.11",
 )

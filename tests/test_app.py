@@ -3,6 +3,7 @@ import sys
 import pytest
 import tempfile
 import json
+import wave
 from unittest.mock import patch, MagicMock, mock_open
 
 # Add the parent directory to the path so we can import the app
@@ -161,6 +162,26 @@ def test_convert_audio(mock_audiosegment, mock_mediainfo, mock_getsize, mock_exi
         mock_sound.export.assert_called_once()
         args, kwargs = mock_sound.export.call_args
         assert kwargs['format'] == 'wav'
+
+
+def test_real_audio_conversion(client, tmp_path):
+    """Exercise pydub/audioop and FFmpeg after Python runtime upgrades."""
+    input_path = tmp_path / 'stereo.wav'
+    with wave.open(str(input_path), 'wb') as source:
+        source.setnchannels(2)
+        source.setsampwidth(1)
+        source.setframerate(44100)
+        source.writeframes(bytes([64, 192]) * 4410)
+
+    app.convert_audio(str(input_path), str(tmp_path), 'real-conversion')
+    task = app.get_tasks()['real-conversion']
+    assert task['status'] == 'complete', task
+    assert task['progress'] == 100
+    with wave.open(task['output_path'], 'rb') as converted:
+        assert converted.getnchannels() == 1
+        assert converted.getframerate() == 8000
+        assert converted.getsampwidth() == 2
+        assert converted.getnframes() > 0
 
 
 def test_download_nonexistent(client):
