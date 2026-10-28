@@ -32,6 +32,30 @@ This application provides a simple web interface for converting various audio fo
 * 🗑️ No permanent file storage (files automatically deleted after download)
 * 🔁 "Convert Another" functionality for batch processing
 * 🌙 Dark Mode / Light Mode
+* 🗣️ Voice script preparation for ElevenLabs and other AI voice generators
+
+### Voice script prep
+
+Paste a script into **Voice script prep** below the audio converter and click
+**Prepare script**. Phone numbers become individual spoken digits, with commas
+between groups and support for extensions. Websites and email addresses become
+spoken text, such as `example dot ca` and `hello at example dot ca`. URL schemes
+(`http://` and `https://`) are omitted; paths and query punctuation are spoken.
+
+For example, `Call (905) 555-0123 or visit www.example.ca.` becomes:
+
+> Call nine zero five, five five five, zero one two three or visit double you double you double you dot example dot ca.
+
+The converter handles North American phone numbers and international numbers
+with an explicit `+` country code. It leaves other numbers (including dates and
+prices) unchanged unless **Also spell every other number digit by digit** is
+selected. That option is useful for codes such as `0042` → `zero zero four two`.
+
+Review and edit the prepared script, then use **Copy prepared script** to paste
+it into your voice generator. If clipboard access is unavailable, the text is
+selected for manual copying. Brand names may need manual phonetic spelling;
+preview the generated voice to confirm pronunciation. Text preparation runs
+entirely in the browser, without storage, API keys, or requests to ElevenLabs.
 
 ## 📸 Screenshots
 
@@ -157,6 +181,9 @@ pip install pytest pytest-cov
 
 # Run tests
 pytest tests/ --cov=app
+
+# Run browser text-conversion tests (Node.js 24+, no npm dependencies)
+node --test tests/js/*.test.js
 ```
 
 ### 🧪 Local Dev Without Docker
