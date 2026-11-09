@@ -74,6 +74,29 @@
             </div>
         </div>
         
+        <section class="voice-prep" aria-labelledby="voice-prep-title">
+            <h1 id="voice-prep-title">Voice script prep</h1>
+            <p>Turn phone numbers, websites, and email addresses into spoken English for ElevenLabs or another AI voice generator.</p>
+            <p class="prep-hint">Runs privately in your browser. No account or API key needed.</p>
+            <form id="voice-prep-form">
+                <label for="voice-input">Original script</label>
+                <textarea id="voice-input" rows="5" placeholder="Call (905) 555-0123 or visit www.example.ca." required></textarea>
+                <div class="prep-options">
+                    <label><input type="checkbox" id="spell-numbers"> Also spell every other number digit by digit (for IDs and codes)</label>
+                </div>
+                <div class="prep-actions">
+                    <button type="submit" class="download-button">Prepare script</button>
+                    <button type="button" id="voice-example" class="reload-button">Load example</button>
+                    <button type="button" id="voice-clear" class="reload-button">Clear</button>
+                </div>
+                <label for="voice-output">Prepared script — editable</label>
+                <textarea id="voice-output" rows="5" aria-describedby="voice-review"></textarea>
+                <p id="voice-review" class="prep-hint">Phone digits are read individually, with commas between groups. Website punctuation is spoken; https:// is omitted. Review names and pronunciation before generating audio.</p>
+                <button type="button" id="voice-copy" class="download-button" disabled>Copy prepared script</button>
+                <p id="voice-status" class="prep-status" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+
         <footer class="footer">
             <p>Made with <span class="credit">AI</span> by <a href="https://www.cornerstone.inc" target="_blank" rel="noopener">Cornerstone.inc</a></p>
             <p class="github-footer">
@@ -83,5 +106,6 @@
     </div>
     
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='voice-prep.js') }}"></script>
 </body>
 </html>

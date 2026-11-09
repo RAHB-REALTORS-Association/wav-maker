@@ -48,6 +48,14 @@ jobs:
         run: |
           # Run the tests 
           pytest tests/ --cov=app --cov-report=xml
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Test voice script preparation
+        run: node --test tests/js/*.test.js
       
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v7

@@ -687,3 +687,43 @@ h1 {
         padding: 0;
     }
 }
+
+/* Voice script preparation */
+.voice-prep {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.voice-prep h1 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+.voice-prep p { margin-bottom: 0.75rem; }
+.voice-prep label { display: block; font-weight: 600; margin: 1rem 0 0.4rem; }
+.voice-prep textarea {
+    display: block;
+    width: 100%;
+    min-height: 120px;
+    padding: 0.8rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--drop-area-bg);
+    border: 1px solid var(--drop-area-border);
+    border-radius: 8px;
+    resize: vertical;
+}
+.voice-prep textarea::placeholder { color: var(--text-secondary); }
+.voice-prep .prep-hint { color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem; }
+.prep-options label { font-size: 0.9rem; font-weight: 400; }
+.prep-options input { margin-right: 0.35rem; accent-color: var(--accent-color); }
+.prep-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+.voice-prep button { font-size: 0.95rem; cursor: pointer; }
+.voice-prep button:disabled { opacity: 0.5; cursor: default; }
+.prep-status { margin-top: 0.5rem; font-size: 0.9rem; min-height: 1.6em; }
+.voice-prep :is(textarea, button, input):focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 3px;
+}
+@media (max-width: 480px) {
+    .prep-actions { flex-direction: column; }
+    .voice-prep button { width: 100%; }
+}

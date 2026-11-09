@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const retryButton = document.getElementById('retryButton');
     const cancelButton = document.getElementById('cancelButton');
     const reloadButton = document.getElementById('reloadButton');
-    const reloadFooter = document.getElementById('reloadFooter');
 
     let currentTaskId = null;
     let statusCheckInterval = null;
@@ -74,10 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle reload buttons
     reloadButton.addEventListener('click', resetUI, false);
-    reloadFooter.addEventListener('click', function(e) {
-        e.preventDefault();
-        resetUI();
-    }, false);
 
     function preventDefaults(e) {
         e.preventDefault();
