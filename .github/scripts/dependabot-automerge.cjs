@@ -20,9 +20,12 @@ async function pages(apiCall, endpoint, key) {
 }
 
 function eligible(pr, repository, branch, sha) {
+    // Only these bot-generated groups are eligible. dependabot.yml restricts
+    // each group to minor/patch updates; majors remain separate manual PRs.
+    const allowedGroup = /^dependabot\/(pip|github_actions|docker)\/patch-and-minor(?:-security)?-[a-z0-9]+$/;
     return pr.state === 'open' && !pr.draft && pr.user.login === 'dependabot[bot]' &&
         pr.head.repo?.full_name === repository && pr.base.repo.full_name === repository &&
-        pr.base.ref === branch && pr.head.ref.startsWith('dependabot/') && pr.head.sha === sha;
+        pr.base.ref === branch && allowedGroup.test(pr.head.ref) && pr.head.sha === sha;
 }
 
 function checksReady(checks, statuses) {

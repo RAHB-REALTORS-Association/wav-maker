@@ -117,8 +117,11 @@ If you encounter issues with the CI/CD pipeline:
 The `Auto-merge Dependabot` workflow runs after a successful pull request run of
 `Build and Publish`. It merges only open, non-draft PRs authored by
 `dependabot[bot]`, from a `dependabot/` branch in this repository, targeting the
-default branch. This applies to all Dependabot update types, including major
-versions and security updates.
+default branch. Only branches for the `patch-and-minor` and
+`patch-and-minor-security` groups are eligible. These groups are restricted to
+minor and patch updates in `.github/dependabot.yml`, for Python, GitHub Actions,
+and Docker. Major updates remain separate PRs for manual review; older PRs from
+the previous unrestricted groups also remain manual.
 
 Both `Run Tests` and `Build and Publish Docker Image` must pass at the current
 PR head commit. All other reported checks and commit statuses must also finish

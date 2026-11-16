@@ -5,7 +5,7 @@ const repository = 'example/app';
 const sha = 'verified-commit';
 function pr() {
     return { number: 7, state: 'open', draft: false, user: { login: 'dependabot[bot]' },
-        head: { ref: 'dependabot/pip/updates', sha, repo: { full_name: repository } },
+        head: { ref: 'dependabot/pip/patch-and-minor-abc123', sha, repo: { full_name: repository } },
         base: { ref: 'main', repo: { full_name: repository } } };
 }
 function event() {
@@ -36,9 +36,30 @@ test('only current, open, same-repository Dependabot PRs targeting main are elig
         { head: { ...pr().head, sha: 'new-commit' } },
         { head: { ...pr().head, repo: { full_name: 'fork/app' } } },
         { head: { ...pr().head, ref: 'ordinary-branch' } },
+        { head: { ...pr().head, ref: 'dependabot/pip/gunicorn-28.0.0' } },
+        { head: { ...pr().head, ref: 'dependabot/pip/python-dependencies-abc123' } },
+        { head: { ...pr().head, ref: 'dependabot/github_actions/actions-setup-node-8' } },
         { base: { ...pr().base, ref: 'release' } },
     ];
     for (const variant of variants) assert.equal(eligible({ ...pr(), ...variant }, repository, 'main', sha), false);
+});
+test('accepts only patch/minor groups for each configured ecosystem', () => {
+    for (const ecosystem of ['pip', 'github_actions', 'docker']) {
+        for (const group of ['patch-and-minor', 'patch-and-minor-security']) {
+            const pull = pr();
+            pull.head.ref = `dependabot/${ecosystem}/${group}-abc123`;
+            assert.equal(eligible(pull, repository, 'main', sha), true);
+        }
+    }
+    // Keep the server-side group policy aligned with the branch allowlist.
+    const config = require('node:fs').readFileSync(require('node:path').join(__dirname, '../../.github/dependabot.yml'), 'utf8');
+    const groups = config.matchAll(/^      (patch-and-minor(?:-security)?):\n([\s\S]*?)(?=^      \S|^  -|$(?![\s\S]))/gm);
+    let count = 0;
+    for (const group of groups) {
+        count++;
+        assert.match(group[2], /update-types: \["minor", "patch"\]/);
+    }
+    assert.equal(count, 6);
 });
 test('tests and Docker build must exist and pass as GitHub Actions checks', () => {
     assert.equal(checksReady(checks(), []), true);
