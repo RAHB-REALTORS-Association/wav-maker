@@ -112,3 +112,24 @@ If you encounter issues with the CI/CD pipeline:
 2. Verify that your tests are passing locally
 3. Ensure your Dockerfile is correctly configured
 4. Check that the GitHub token has appropriate permissions
+# Dependabot auto-merge
+
+The `Auto-merge Dependabot` workflow runs after a successful pull request run of
+`Build and Publish`. It merges only open, non-draft PRs authored by
+`dependabot[bot]`, from a `dependabot/` branch in this repository, targeting the
+default branch. This applies to all Dependabot update types, including major
+versions and security updates.
+
+Both `Run Tests` and `Build and Publish Docker Image` must pass at the current
+PR head commit. All other reported checks and commit statuses must also finish
+without failure. The workflow waits up to five minutes for outstanding checks;
+failed checks or a changed PR head prevent merging. Re-run the PR's build
+workflow after resolving a failure to try again.
+
+The privileged workflow executes only scripts from the default branch. It uses
+the repository's short-lived `GITHUB_TOKEN`, merges with an expected head SHA,
+and dispatches `Build and Publish` on the default branch after merging. The
+explicit dispatch is necessary because merges made by `GITHUB_TOKEN` do not
+trigger push workflows. No personal token or extra secret is needed. Releases
+remain a separate, tagged operation.
+
