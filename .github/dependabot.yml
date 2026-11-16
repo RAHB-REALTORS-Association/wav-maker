@@ -7,11 +7,13 @@ updates:
       interval: "weekly"
     open-pull-requests-limit: 10
     groups:
-      github-actions:
+      patch-and-minor:
         applies-to: version-updates
+        update-types: ["minor", "patch"]
         patterns: ["*"]
-      github-actions-security:
+      patch-and-minor-security:
         applies-to: security-updates
+        update-types: ["minor", "patch"]
         patterns: ["*"]
 
   # Maintain dependencies for pip
@@ -21,11 +23,13 @@ updates:
       interval: "weekly"
     open-pull-requests-limit: 10
     groups:
-      python-dependencies:
+      patch-and-minor:
         applies-to: version-updates
+        update-types: ["minor", "patch"]
         patterns: ["*"]
-      python-security:
+      patch-and-minor-security:
         applies-to: security-updates
+        update-types: ["minor", "patch"]
         patterns: ["*"]
 
   # Maintain dependencies for Docker
@@ -34,3 +38,12 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
+    groups:
+      patch-and-minor:
+        applies-to: version-updates
+        update-types: ["minor", "patch"]
+        patterns: ["*"]
+      patch-and-minor-security:
+        applies-to: security-updates
+        update-types: ["minor", "patch"]
+        patterns: ["*"]
