@@ -136,3 +136,13 @@ explicit dispatch is necessary because merges made by `GITHUB_TOKEN` do not
 trigger push workflows. No personal token or extra secret is needed. Releases
 remain a separate, tagged operation.
 
+# Container security updates
+
+Every CI image build pulls the current Python base image and rebuilds without
+Docker layer caching. The Dockerfile upgrades installed Debian packages before
+installing FFmpeg, so available security fixes are applied even when the base
+image has not been republished. To refresh a deployed image between source
+changes, dispatch **Build and Publish** on `main`, then redeploy the application
+and rescan the running image in Coolify. Findings without an available Debian
+fix may remain after a rebuild.
+
